@@ -1,3 +1,5 @@
+.idea/*
+
 # Cache and logs (Symfony2)
 /app/cache/*
 /app/logs/*
@@ -39,3 +41,20 @@
 
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
+
+
+/app/config/parameters.yml
+/build/
+/phpunit.xml
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
+/web/bundles/
