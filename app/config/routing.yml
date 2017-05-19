@@ -1,3 +1,8 @@
+api:
+    resource: "@ApiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
@@ -9,4 +14,10 @@ api_login_check:
         _method: POST
 
 app_bundle:
-   resource: "@AppBundle/Resources/config/routing.yml"
+    resource: "@AppBundle/Resources/config/routing.yml"
+
+api_bundle:
+    type: rest
+    resource: "@ApiBundle/Resources/config/routing.yml"
+    prefix: api
+    defaults : {_format: json}

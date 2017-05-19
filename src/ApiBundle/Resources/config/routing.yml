@@ -1,0 +1,3 @@
+api_default:
+    path:  /default
+    defaults: { _controller: "ApiBundle:Default:index" }
