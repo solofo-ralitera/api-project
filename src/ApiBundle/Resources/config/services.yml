@@ -1,0 +1,4 @@
+services:
+    api.service:
+        class:     ApiBundle\Services\ApiService
+        autowire: true
