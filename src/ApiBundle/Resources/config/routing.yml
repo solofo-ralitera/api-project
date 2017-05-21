@@ -1,3 +1,8 @@
 api_default:
     path:  /default
     defaults: { _controller: "ApiBundle:Default:index" }
+
+api_playlist:
+    path:  /playlist
+    defaults: { _controller: "ApiBundle:PlayList:index" }
+    _method : GET
