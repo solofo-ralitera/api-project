@@ -17,23 +17,16 @@ class PlayListController extends FOSRestController
 {
     public function indexAction(Request $request)
     {
-        $view = $this->view([
-            [
-                "file"  => "track1.mp3",
-                "title" => "Track 1",
+        $rangeArray = range(0, 100);
+        $playlist = array();
+        foreach($rangeArray as $i) {
+            $playlist["track" . $i] = [
+                "file"  => "track".$i.".mp3",
+                "title" => "Track ".$i."",
                 "image" => "coverart.jpg"
-            ],
-            [
-                "file"  => "track2.mp3",
-                "title" => "Track 2",
-                "image" => "coverart.jpg"
-            ],
-            [
-                "file"  => "track3.mp3",
-                "title" => "Track 3",
-                "image" => "coverart.jpg"
-            ]
-        ], Response::HTTP_OK);
+            ];
+        }
+        $view = $this->view($playlist, Response::HTTP_OK);
 
         return $this->handleView($view);
     }
