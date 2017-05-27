@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends FOSRestController
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $view = $this->view([
             'success' => true,

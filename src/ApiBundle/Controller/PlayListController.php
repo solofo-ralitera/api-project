@@ -10,12 +10,11 @@ namespace ApiBundle\Controller;
 
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class PlayListController extends FOSRestController
 {
-    public function getAction(Request $request)
+    public function getAction()
     {
         $rangeArray = range(0, 10);
         $playlist = array();
@@ -31,7 +30,7 @@ class PlayListController extends FOSRestController
         return $this->handleView($view);
     }
 
-    public function setAction(Request $request)
+    public function setAction()
     {
 
         $view = $this->view([], Response::HTTP_NO_CONTENT);

@@ -8,7 +8,6 @@
 
 namespace ApiBundle\Controller;
 
-use AppBundle\Entity\Publication;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 

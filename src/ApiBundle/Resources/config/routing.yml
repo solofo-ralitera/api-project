@@ -12,6 +12,12 @@ api_playlist_set:
     defaults: { _controller: "ApiBundle:PlayList:set" }
     methods : [PUT]
 
+# User
+api_publication_type_set:
+    path:  /users
+    defaults: { _controller: "ApiBundle:User:put" }
+    methods : [PUT]
+
 # Publication type
 api_publication_type_set:
     path:  /publications/type

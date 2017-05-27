@@ -20,14 +20,13 @@ class FollowController extends FOSRestController
         $ApiSvc = $this->container->get('api.service');
         $em = $this->getDoctrine()->getManager();
         $follower = $ApiSvc->getUser();
-
         $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-
         foreach($ApiSvc->getRequestContent() as $userId) {
-            $following = $userRepo->find($userId);
             $follow = new Follow();
-            $follow->setFollowing($following);
-            $follow->setFollower($follower);
+            $follow
+                ->setFollowing($userRepo->find($userId))
+                ->setFollower($follower)
+            ;
             $em->persist($follow);
         }
         $em->flush();

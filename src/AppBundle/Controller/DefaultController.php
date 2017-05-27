@@ -27,12 +27,18 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         // Insert publication type
+        $publications = [
+            ['Timeline', 'TML'],
+            ['Comment', 'CMT'],
+        ];
         $puRepo = $this->getDoctrine()->getRepository('AppBundle:PublicationType');
-        if(empty($puRepo->findOneByName('Timeline'))) {
-            $pubType = new PublicationType();
-            $pubType->setName('Timeline');
-            $pubType->setCode('TLN');
-            $em->persist($pubType);
+        foreach ($publications as $publication) {
+            if (empty($puRepo->findOneByCode($publication[1]))) {
+                $pubType = new PublicationType();
+                $pubType->setName($publication[0]);
+                $pubType->setCode($publication[1]);
+                $em->persist($pubType);
+            }
         }
 
         // Insert attachement type

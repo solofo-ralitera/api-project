@@ -10,12 +10,11 @@ namespace ApiBundle\Controller;
 
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class TimeLineController extends FOSRestController
 {
-    public function getAction(Request $request)
+    public function getAction()
     {
         $rangeArray = range(0, 10);
         $playlist = array();
