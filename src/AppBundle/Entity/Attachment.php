@@ -51,10 +51,14 @@ class Attachment
     /**
      * @var string
      *
-     * @ORM\Column(name="parameters", type="string", length=255)
+     * @ORM\Column(name="parameters", type="string")
      */
     private $parameters;
 
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
     /**
      * Get id
@@ -169,7 +173,7 @@ class Attachment
      *
      * @return Attachment
      */
-    public function setAuthor(\AppBundle\Entity\User $author = null)
+    public function setAuthor(User $author = null)
     {
         $this->author = $author;
 

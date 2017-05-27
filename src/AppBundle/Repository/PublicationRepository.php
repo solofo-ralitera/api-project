@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Publication;
+
 /**
  * TimeLineRepository
  *
@@ -10,4 +12,12 @@ namespace AppBundle\Repository;
  */
 class PublicationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getNew(array $publication) {
+        $pub = new Publication();
+        return $pub
+            ->setStatus($publication['status'])
+            ->setAuthor($publication['author'])
+            ->setType($publication['type'])
+        ;
+    }
 }

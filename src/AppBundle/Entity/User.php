@@ -14,13 +14,6 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-        $this->publications = new ArrayCollection();
-    }
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -31,7 +24,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="lang", type="string", length=6)
+     * @ORM\Column(name="lang", type="string", length=6, nullable=true)
      */
     private $lang;
 
@@ -44,6 +37,25 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Attachment", mappedBy="author")
      */
     private $attachments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Follow", mappedBy="following")
+     */
+    private $followings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Follow", mappedBy="follower")
+     */
+    private $followers;
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+        $this->publications = new ArrayCollection();
+        $this->followers = new ArrayCollection();
+        $this->followings = new ArrayCollection();
+    }
 
     /**
      * Add publication
@@ -110,7 +122,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addAttachment(\AppBundle\Entity\Attachment $attachment)
+    public function addAttachment(Attachment $attachment)
     {
         $this->attachments[] = $attachment;
 
@@ -122,7 +134,7 @@ class User extends BaseUser
      *
      * @param \AppBundle\Entity\Attachment $attachment
      */
-    public function removeAttachment(\AppBundle\Entity\Attachment $attachment)
+    public function removeAttachment(Attachment $attachment)
     {
         $this->attachments->removeElement($attachment);
     }
@@ -135,5 +147,73 @@ class User extends BaseUser
     public function getAttachments()
     {
         return $this->attachments;
+    }
+
+    /**
+     * Add following
+     *
+     * @param \AppBundle\Entity\Follow $following
+     *
+     * @return User
+     */
+    public function addFollowing(\AppBundle\Entity\Follow $following)
+    {
+        $this->followings[] = $following;
+
+        return $this;
+    }
+
+    /**
+     * Remove following
+     *
+     * @param \AppBundle\Entity\Follow $following
+     */
+    public function removeFollowing(\AppBundle\Entity\Follow $following)
+    {
+        $this->followings->removeElement($following);
+    }
+
+    /**
+     * Get followings
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowings()
+    {
+        return $this->followings;
+    }
+
+    /**
+     * Add follower
+     *
+     * @param \AppBundle\Entity\Follow $follower
+     *
+     * @return User
+     */
+    public function addFollower(\AppBundle\Entity\Follow $follower)
+    {
+        $this->followers[] = $follower;
+
+        return $this;
+    }
+
+    /**
+     * Remove follower
+     *
+     * @param \AppBundle\Entity\Follow $follower
+     */
+    public function removeFollower(\AppBundle\Entity\Follow $follower)
+    {
+        $this->followers->removeElement($follower);
+    }
+
+    /**
+     * Get followers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
     }
 }

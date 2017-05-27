@@ -35,7 +35,7 @@ class Publication
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PublicationType")
+     * @ORM\ManyToOne(targetEntity="PublicationType",  inversedBy="publications")
      * @ORM\JoinColumn(name="type", referencedColumnName="id")
      */
     private $type;
@@ -193,5 +193,39 @@ class Publication
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Add attachment
+     *
+     * @param \AppBundle\Entity\Attachment $attachment
+     *
+     * @return Publication
+     */
+    public function addAttachment(Attachment $attachment)
+    {
+        $this->attachments[] = $attachment;
+
+        return $this;
+    }
+
+    /**
+     * Remove attachment
+     *
+     * @param \AppBundle\Entity\Attachment $attachment
+     */
+    public function removeAttachment(Attachment $attachment)
+    {
+        $this->attachments->removeElement($attachment);
+    }
+
+    /**
+     * Get attachments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAttachments()
+    {
+        return $this->attachments;
     }
 }

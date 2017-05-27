@@ -25,14 +25,14 @@ class AttachmentType
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50)
+     * @ORM\Column(name="name", type="string", length=15)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=20, unique=true)
+     * @ORM\Column(name="code", type="string", length=5, unique=true)
      */
     private $code;
 

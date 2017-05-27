@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,10 +25,21 @@ class PublicationType
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=20, unique=true)
+     * @ORM\Column(name="name", type="string", length=15)
      */
     private $name;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=5, unique=true)
+     */
+    private $code;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Publication", mappedBy="type")
+     */
+    private $publications;
 
     /**
      * Get id
@@ -62,5 +74,69 @@ class PublicationType
     {
         return $this->name;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->publications = new ArrayCollection();
+    }
 
+    /**
+     * Add publication
+     *
+     * @param \AppBundle\Entity\Publication $publication
+     *
+     * @return PublicationType
+     */
+    public function addPublication(Publication $publication)
+    {
+        $this->publications[] = $publication;
+
+        return $this;
+    }
+
+    /**
+     * Remove publication
+     *
+     * @param \AppBundle\Entity\Publication $publication
+     */
+    public function removePublication(Publication $publication)
+    {
+        $this->publications->removeElement($publication);
+    }
+
+    /**
+     * Get publications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPublications()
+    {
+        return $this->publications;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return PublicationType
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+}

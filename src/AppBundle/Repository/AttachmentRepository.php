@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Attachment;
+
 /**
  * AttachmentRepository
  *
@@ -10,4 +12,19 @@ namespace AppBundle\Repository;
  */
 class AttachmentRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getNew(array $attachment) {
+        $att = new Attachment();
+        return $att
+            ->setName($attachment['name'])
+            ->setAuthor($attachment['author'])
+            ->setType($attachment['type'])
+            ->setParameters(json_encode([
+                'body' => $attachment['body'],
+            ]))
+        ;
+    }
+
+
+
 }

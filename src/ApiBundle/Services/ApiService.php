@@ -27,7 +27,9 @@ class ApiService
     public function getUser()
     {
         $repository = $this->em->getRepository('AppBundle:User');
-        return $repository->find(1);
+        return $repository->findOneBy([
+            'username' => 'admin'
+        ]);
         /*
         $token = $this->tokenStorage->getToken();
         if ($token instanceof JWTUserToken) {

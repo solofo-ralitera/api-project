@@ -8,11 +8,12 @@
 
 namespace ApiBundle\Controller;
 
+use AppBundle\Entity\Attachment;
 use AppBundle\Entity\Publication;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 
-class PublicationController extends FOSRestController
+class AttachmentController extends FOSRestController
 {
 
     public function putAction()
@@ -21,32 +22,17 @@ class PublicationController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $user = $ApiSvc->getUser();
 
-        $pubTypeRepo = $this->getDoctrine()->getRepository('AppBundle:PublicationType');
-        $pubRepo = $this->getDoctrine()->getRepository('AppBundle:Publication');
         $attRepo = $this->getDoctrine()->getRepository('AppBundle:Attachment');
         $attTypeRepo = $this->getDoctrine()->getRepository('AppBundle:AttachmentType');
 
-        foreach($ApiSvc->getRequestContent() as $publication) {
-            $pub = $pubRepo->getNew([
-                'status' => $publication['status'],
+        foreach($ApiSvc->getRequestContent() as $attachment) {
+            $att = $attRepo->getNew([
+                'name' => $attachment['name'],
                 'author' => $user,
-                'type' => $pubTypeRepo->findOneByCode($publication['type']),
+                'type' => $attTypeRepo->findOneByCode($attachment['type']),
+                'body' => $attachment['body'],
             ]);
-
-            // Attachments
-            if(! empty($publication['attachments'])) {
-                foreach ($publication['attachments'] as $attachment) {
-                    $att = $attRepo->getNew([
-                        'name' => $attachment['name'],
-                        'author' => $user,
-                        'type' => $attTypeRepo->findOneByCode($attachment['type']),
-                        'body' => $attachment['body'],
-                    ]);
-                    $pub->addAttachment($att);
-                    $em->persist($att);
-                }
-            }
-            $em->persist($pub);
+            $em->persist($att);
         }
         $em->flush();
 
@@ -58,21 +44,19 @@ class PublicationController extends FOSRestController
         $ApiSvc = $this->container->get('api.service');
         $user = $ApiSvc->getUser();
 
-        $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-
-        $view = $this->view($userRepo->getPublications($user), Response::HTTP_OK);
+        $view = $this->view($user->getAttachments(), Response::HTTP_OK);
         return $this->handleView($view);
     }
 
     public function deleteAction() {
         $ApiSvc = $this->container->get('api.service');
         $em = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository('AppBundle:Publication');
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Attachment');
         $user = $ApiSvc->getUser();
 
-        foreach($ApiSvc->getRequestContent() as $pubId) {
+        foreach($ApiSvc->getRequestContent() as $attId) {
             $pub = $repository->findOneBy([
-                'id' => (int) $pubId,
+                'id' => (int) $attId,
                 'author' => $user->getId(),
             ]);
             if(! empty($pub)) {

@@ -40,6 +40,34 @@ api_publication_delete:
     defaults: { _controller: "ApiBundle:Publication:delete" }
     methods : [DELETE]
 
+# Attachment
+api_attachement_set:
+    path:  /attachments
+    defaults: { _controller: "ApiBundle:Attachment:put" }
+    methods : [PUT]
+api_attachement_get:
+    path:  /attachments
+    defaults: { _controller: "ApiBundle:Attachment:get" }
+    methods : [GET]
+api_attachement_delete:
+    path:  /attachments
+    defaults: { _controller: "ApiBundle:Attachment:delete" }
+    methods : [DELETE]
+
+# Follow
+api_follower_set:
+    path:  /followers
+    defaults: { _controller: "ApiBundle:Follow:putFollowers" }
+    methods : [PUT]
+api_follower_get:
+    path:  /followers
+    defaults: { _controller: "ApiBundle:Follow:getFollowers" }
+    methods : [GET]
+api_following_get:
+    path:  /followings
+    defaults: { _controller: "ApiBundle:Follow:getFollowings" }
+    methods : [GET]
+
 # TimeLine
 api_timeline_get:
     path:  /timelines
