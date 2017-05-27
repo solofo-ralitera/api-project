@@ -62,17 +62,29 @@ api_attachement_delete:
 
 # Follow
 api_follower_set:
-    path:  /followers
-    defaults: { _controller: "ApiBundle:Follow:putFollowers" }
+    path:  /users/{user}/followers
+    defaults: { _controller: "ApiBundle:Follow:putFollowers", user: 0 }
+    requirements:
+        user: '\d+'
     methods : [PUT]
 api_follower_get:
-    path:  /followers
-    defaults: { _controller: "ApiBundle:Follow:getFollowers" }
+    path:  /users/{user}/followers
+    defaults: { _controller: "ApiBundle:Follow:getFollowers", user: 0 }
+    requirements:
+        user: '\d+'
     methods : [GET]
 api_following_get:
-    path:  /followings
-    defaults: { _controller: "ApiBundle:Follow:getFollowings" }
+    path:  /users/{user}/followings
+    defaults: { _controller: "ApiBundle:Follow:getFollowings", user: 0 }
+    requirements:
+        user: '\d+'
     methods : [GET]
+api_following_delete:
+    path:  /users/{user}/followings
+    defaults: { _controller: "ApiBundle:Follow:deleteFollowings", user: 0 }
+    requirements:
+        user: '\d+'
+    methods : [delete]
 
 # TimeLine
 api_timeline_get:

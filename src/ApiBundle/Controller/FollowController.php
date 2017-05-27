@@ -15,65 +15,66 @@ use Symfony\Component\HttpFoundation\Response;
 class FollowController extends FOSRestController
 {
 
-    public function putFollowersAction()
+    public function putFollowersAction(int $user)
     {
         $ApiSvc = $this->container->get('api.service');
         $em = $this->getDoctrine()->getManager();
-        $follower = $ApiSvc->getUser();
         $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-        foreach($ApiSvc->getRequestContent() as $userId) {
-            $follow = new Follow();
-            $follow
-                ->setFollowing($userRepo->find($userId))
-                ->setFollower($follower)
-            ;
-            $em->persist($follow);
-        }
-        $em->flush();
-
-        $view = $this->view(null, Response::HTTP_NO_CONTENT);
-        return $this->handleView($view);
-    }
-
-    public function getFollowersAction() {
-        $ApiSvc = $this->container->get('api.service');
-        $user = $ApiSvc->getUser();
-
-        $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-
-        $view = $this->view($userRepo->getFollowers($user), Response::HTTP_OK);
-        return $this->handleView($view);
-    }
-
-    public function getFollowingsAction() {
-        $ApiSvc = $this->container->get('api.service');
-        $user = $ApiSvc->getUser();
-
-        $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-
-        $view = $this->view($userRepo->getFollowings($user), Response::HTTP_OK);
-        return $this->handleView($view);
-    }
-
-
-    public function deleteAction() {
-        $ApiSvc = $this->container->get('api.service');
-        $em = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository('AppBundle:Attachment');
-        $user = $ApiSvc->getUser();
-
-        foreach($ApiSvc->getRequestContent() as $attId) {
-            $pub = $repository->findOneBy([
-                'id' => (int) $attId,
-                'author' => $user->getId(),
-            ]);
-            if(! empty($pub)) {
-                $em->remove($pub);
+        if($follower = $userRepo->find($user)) {
+            foreach ($ApiSvc->getRequestContent() as $userId) {
+                $follow = new Follow();
+                $follow
+                    ->setFollowing($userRepo->find($userId))
+                    ->setFollower($follower);
+                $em->persist($follow);
             }
+            $em->flush();
         }
-        $em->flush();
-
         $view = $this->view(null, Response::HTTP_NO_CONTENT);
+        return $this->handleView($view);
+    }
+
+    public function getFollowersAction(int $user) {
+        $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+        $return = array();
+        if($u = $userRepo->find($user)) {
+            $return = $userRepo->getFollowers($u);
+        }
+        $view = $this->view($return, Response::HTTP_OK);
+        return $this->handleView($view);
+    }
+
+    public function getFollowingsAction(int $user) {
+        $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+        $return = array();
+        if($u = $userRepo->find($user)) {
+            $return = $userRepo->getFollowings($u);
+        }
+        $view = $this->view($return, Response::HTTP_OK);
+        return $this->handleView($view);
+    }
+
+    public function deleteFollowingsAction(int $user) {
+        $ApiSvc = $this->container->get('api.service');
+        $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+        $followRepo = $this->getDoctrine()->getRepository('AppBundle:Follow');
+        $em = $this->getDoctrine()->getManager();
+        if($follower = $userRepo->find($user)) {
+            foreach ($ApiSvc->getRequestContent() as $userId) {
+                $folls = $followRepo->findBy([
+                    'following' => $userId,
+                    'follower' => $follower,
+                ]);
+                if(! empty($folls)) {
+                    foreach ($folls as $foll) {
+                        $em->remove($foll);
+                    }
+                }
+                unset($folls);
+            }
+            $em->flush();
+        }
+        $view = $this->view(null, Response::HTTP_OK);
         return $this->handleView($view);
     }
 
