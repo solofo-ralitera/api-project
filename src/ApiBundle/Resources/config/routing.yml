@@ -2,7 +2,51 @@ api_default:
     path:  /default
     defaults: { _controller: "ApiBundle:Default:index" }
 
-api_playlist:
+api_playlist_get:
     path:  /playlist
-    defaults: { _controller: "ApiBundle:PlayList:index" }
-    _method : GET
+    defaults: { _controller: "ApiBundle:PlayList:get" }
+    methods : [GET]
+
+api_playlist_set:
+    path:  /playlist
+    defaults: { _controller: "ApiBundle:PlayList:set" }
+    methods : [PUT]
+
+# Publication type
+api_publication_type_set:
+    path:  /publications/type
+    defaults: { _controller: "ApiBundle:PublicationType:put" }
+    methods : [PUT]
+api_publication_type_get:
+    path:  /publications/type
+    defaults: { _controller: "ApiBundle:PublicationType:get" }
+    methods : [GET]
+api_publication_type_delete:
+    path:  /publications/type
+    defaults: { _controller: "ApiBundle:PublicationType:delete" }
+    methods : [DELETE]
+
+# Publication
+api_publication_set:
+    path:  /publications
+    defaults: { _controller: "ApiBundle:Publication:put" }
+    methods : [PUT]
+api_publication_get:
+    path:  /publications
+    defaults: { _controller: "ApiBundle:Publication:get" }
+    methods : [GET]
+api_publication_delete:
+    path:  /publications
+    defaults: { _controller: "ApiBundle:Publication:delete" }
+    methods : [DELETE]
+
+# TimeLine
+api_timeline_get:
+    path:  /timelines
+    defaults: { _controller: "ApiBundle:TimeLine:get" }
+    methods : [GET]
+
+api_timeline_set:
+    path:  /timelines
+    defaults: { _controller: "ApiBundle:TimeLine:set" }
+    methods : [PUT]

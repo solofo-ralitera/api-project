@@ -13,7 +13,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PlayListController extends FOSRestController
+class TimeLineController extends FOSRestController
 {
     public function getAction(Request $request)
     {
@@ -28,13 +28,6 @@ class PlayListController extends FOSRestController
         }
         $view = $this->view($playlist, Response::HTTP_OK);
 
-        return $this->handleView($view);
-    }
-
-    public function setAction(Request $request)
-    {
-
-        $view = $this->view([], Response::HTTP_NO_CONTENT);
         return $this->handleView($view);
     }
 }
