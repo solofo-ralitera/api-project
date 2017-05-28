@@ -36,7 +36,9 @@ class PublicationTypeController extends FOSRestController
 
     public function getAction() {
         $repository = $this->getDoctrine()->getRepository('AppBundle:PublicationType');
-        $view = $this->view($repository->findAll(), Response::HTTP_OK);
+        $view = $this->view(array_map(function($item) {
+            return $item->toArray();
+        }, $repository->findAll()), Response::HTTP_OK);
         return $this->handleView($view);
     }
 

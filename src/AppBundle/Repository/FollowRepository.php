@@ -12,14 +12,5 @@ use AppBundle\Entity\User;
  */
 class FollowRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getFollowers(User $user) {
-        $res = $this->findBy([
-            'following' => $user
-        ]);
-        $return = [];
-        foreach ($res as $follow) {
-            $return[] = $follow->getFollower();
-        }
-        return $return;
-    }
+
 }

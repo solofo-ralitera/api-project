@@ -12,43 +12,11 @@ use AppBundle\Entity\User;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getInfo(User $user) {
-        return [
-            'id' => $user->getId(),
-            'name' => $user->getUsername(),
-        ];
-    }
-
-    public function getPublications(User $user) {
-        $return = array();
-        foreach($user->getPublications() as $publication) {
-            $attachments = $publication->getAttachments();
-            $att = [];
-            foreach ($attachments as $attachment) {
-                $att[] = [
-                    'id' => $attachment->getId(),
-                    'type' => $attachment->getType()->getCode(),
-                    'name' => $attachment->getName(),
-                    'date' => $attachment->getDate(),
-                    'content' => json_decode($attachment->getParameters(), true),
-                ];
-            }
-            unset($attachments);
-            $return[] = [
-                'id' => $publication->getId(),
-                'status' => $publication->getStatus(),
-                'date' => $publication->getDate(),
-                'attachments' => $att,
-            ];
-        }
-        return $return;
-    }
 
     public function getFollowers(User $user) {
         $return = [];
         foreach($user->getFollowings() as $follow) {
-            $follower = $follow->getFollower();
-            $return[] = $this->getInfo($follower);
+            $return[] = $follow->getFollower()->toArray();
         }
         return $return;
     }
@@ -56,8 +24,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     public function getFollowings(User $user) {
         $return = [];
         foreach($user->getFollowers() as $follow) {
-            $following = $follow->getFollowing();
-            $return[] = $this->getInfo($following);
+            $return[] = $follow->getFollowing()->toArray();
         }
         return $return;
     }

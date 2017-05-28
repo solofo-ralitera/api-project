@@ -42,6 +42,22 @@ class PublicationType
     private $publications;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->publications = new ArrayCollection();
+    }
+
+    public function toArray() {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'code' => $this->getCode(),
+        ];
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -73,13 +89,6 @@ class PublicationType
     public function getName()
     {
         return $this->name;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->publications = new ArrayCollection();
     }
 
     /**

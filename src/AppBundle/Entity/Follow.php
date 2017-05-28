@@ -34,6 +34,13 @@ class Follow
      */
     private $follower;
 
+    public function toArray() {
+        return [
+            'following' => $this->getFollowing()->toArray(),
+            'follower' => $this->getFollower()->toArray(),
+        ];
+    }
+
     /**
      * Get id
      *
@@ -51,7 +58,7 @@ class Follow
      *
      * @return Follow
      */
-    public function setFollowing(\AppBundle\Entity\User $following = null)
+    public function setFollowing(User $following = null)
     {
         $this->following = $following;
 
@@ -75,7 +82,7 @@ class Follow
      *
      * @return Follow
      */
-    public function setFollower(\AppBundle\Entity\User $follower = null)
+    public function setFollower(User $follower = null)
     {
         $this->follower = $follower;
 

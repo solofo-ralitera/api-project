@@ -42,7 +42,9 @@ class AttachmentController extends FOSRestController
         $ApiSvc = $this->container->get('api.service');
         $user = $ApiSvc->getUser();
 
-        $view = $this->view($user->getAttachments(), Response::HTTP_OK);
+        $view = $this->view($user->getAttachments()->map(function($item) {
+            return $item->toArray();
+        }), Response::HTTP_OK);
         return $this->handleView($view);
     }
 

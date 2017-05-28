@@ -60,6 +60,15 @@ class Attachment
         $this->date = new \DateTime();
     }
 
+    public function toArray() {
+        return [
+            'id' => $this->getId(),
+            'date' => $this->getDate(),
+            'name' => $this->getName(),
+            'type' => $this->getType()->toArray(),
+        ];
+    }
+
     /**
      * Get id
      *

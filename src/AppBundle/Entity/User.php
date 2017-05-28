@@ -48,6 +48,12 @@ class User extends BaseUser
      */
     private $followers;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Attachment")
+     * @ORM\JoinColumn(name="avatar", referencedColumnName="id")
+     */
+    private $avatar;
+
     public function __construct()
     {
         parent::__construct();
@@ -55,6 +61,14 @@ class User extends BaseUser
         $this->publications = new ArrayCollection();
         $this->followers = new ArrayCollection();
         $this->followings = new ArrayCollection();
+    }
+
+    public function toArray() {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getUsername(),
+            'avatar' => ($this->getAvatar())? $this->getAvatar()->toArray() : null,
+        ];
     }
 
     /**
@@ -190,7 +204,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addFollower(\AppBundle\Entity\Follow $follower)
+    public function addFollower(Follow $follower)
     {
         $this->followers[] = $follower;
 
@@ -202,7 +216,7 @@ class User extends BaseUser
      *
      * @param \AppBundle\Entity\Follow $follower
      */
-    public function removeFollower(\AppBundle\Entity\Follow $follower)
+    public function removeFollower(Follow $follower)
     {
         $this->followers->removeElement($follower);
     }
@@ -215,5 +229,29 @@ class User extends BaseUser
     public function getFollowers()
     {
         return $this->followers;
+    }
+
+    /**
+     * Set avatar
+     *
+     * @param \AppBundle\Entity\Attachment $avatar
+     *
+     * @return User
+     */
+    public function setAvatar(Attachment $avatar = null)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return \AppBundle\Entity\Attachment
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 }

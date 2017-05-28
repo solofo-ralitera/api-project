@@ -65,6 +65,18 @@ class Publication
         $this->date = new \DateTime();
     }
 
+    public function toArray() {
+        return [
+            'id' => $this->getId(),
+            'status' => $this->getStatus(),
+            'date' => $this->getDate(),
+            'author' => $this->getAuthor()->toArray(),
+            'attachments' => $this->getAttachments()->map(function($item) {
+                    return $item->toArray();
+                })->toArray(),
+        ];
+    }
+
     /**
      * Get id
      *

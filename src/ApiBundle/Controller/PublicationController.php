@@ -56,10 +56,9 @@ class PublicationController extends FOSRestController
     public function getAction() {
         $ApiSvc = $this->container->get('api.service');
         $user = $ApiSvc->getUser();
-
-        $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-
-        $view = $this->view($userRepo->getPublications($user), Response::HTTP_OK);
+        $view = $this->view($user->getPublications()->map(function($item) {
+            return $item->toArray();
+        }), Response::HTTP_OK);
         return $this->handleView($view);
     }
 

@@ -42,6 +42,21 @@ class AttachmentType
     private $attachments;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->attachments = new ArrayCollection();
+    }
+
+    public function toArray() {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'code' => $this->getCode(),
+        ];
+    }
+    /**
      * Get id
      *
      * @return int
@@ -97,13 +112,6 @@ class AttachmentType
     public function getCode()
     {
         return $this->code;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->attachments = new ArrayCollection();
     }
 
     /**
