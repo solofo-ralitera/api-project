@@ -45,4 +45,8 @@ class ApiService
         return json_decode($request->getContent(), true);
     }
 
+    public function getUploadedFile() {
+        // TODO : cas if file sent in form
+        return $this->requestStack->getCurrentRequest()->getContent();
+    }
 }

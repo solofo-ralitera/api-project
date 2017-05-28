@@ -14,8 +14,7 @@ class AttachmentRepository extends \Doctrine\ORM\EntityRepository
 {
 
     public function getNew(array $attachment) {
-        $att = new Attachment();
-        return $att
+        return (new Attachment())
             ->setName($attachment['name'])
             ->setAuthor($attachment['author'])
             ->setType($attachment['type'])
@@ -25,6 +24,9 @@ class AttachmentRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
+    public function getNewAvatar() {
+        return new Attachment();
+    }
 
 
 }

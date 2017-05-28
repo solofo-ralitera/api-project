@@ -12,12 +12,6 @@ api_playlist_set:
     defaults: { _controller: "ApiBundle:PlayList:set" }
     methods : [PUT]
 
-# User
-api_publication_type_set:
-    path:  /users
-    defaults: { _controller: "ApiBundle:User:put" }
-    methods : [PUT]
-
 # Publication type
 api_publication_type_set:
     path:  /publications/type
@@ -32,7 +26,7 @@ api_publication_type_delete:
     defaults: { _controller: "ApiBundle:PublicationType:delete" }
     methods : [DELETE]
 
-# Publication
+# Publications
 api_publication_set:
     path:  /publications
     defaults: { _controller: "ApiBundle:Publication:put" }
@@ -60,7 +54,12 @@ api_attachement_delete:
     defaults: { _controller: "ApiBundle:Attachment:delete" }
     methods : [DELETE]
 
-# Follow
+# User
+api_publication_type_set:
+    path:  /users
+    defaults: { _controller: "ApiBundle:User:put" }
+    methods : [PUT]
+# User Follow
 api_follower_set:
     path:  /users/{user}/followers
     defaults: { _controller: "ApiBundle:Follow:putFollowers", user: 0 }
@@ -85,6 +84,26 @@ api_following_delete:
     requirements:
         user: '\d+'
     methods : [delete]
+# User Publications
+api_user_publications_get:
+    path:  /users/{user}/publications
+    defaults: { _controller: "ApiBundle:UserPublications:get" }
+    methods : [GET]
+    requirements:
+        user: '\d+'
+# User Avatar
+api_user_avatar_set:
+    path:  /users/{user}/avatar
+    defaults: { _controller: "ApiBundle:UserAvatar:put" }
+    methods : [PUT]
+    requirements:
+        user: '\d+'
+api_user_avatar_get:
+    path:  /users/{user}/avatar
+    defaults: { _controller: "ApiBundle:UserAvatar:get" }
+    methods : [GET]
+    requirements:
+        user: '\d+'
 
 # TimeLine
 api_timeline_get:

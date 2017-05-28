@@ -24,6 +24,20 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="last_name", type="string", nullable=true)
+     */
+    private $lastName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="first_name", type="string", nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="lang", type="string", length=6, nullable=true)
      */
     private $lang;
@@ -66,8 +80,10 @@ class User extends BaseUser
     public function toArray() {
         return [
             'id' => $this->getId(),
-            'name' => $this->getUsername(),
-            'avatar' => ($this->getAvatar())? $this->getAvatar()->toArray() : null,
+            'username' => $this->getUsername(),
+            'last_name' => $this->getLastName(),
+            'first_name' => $this->getFirstName(),
+            'avatar' => $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . '/api/users/'.$this->getId().'/avatar',
         ];
     }
 
@@ -253,5 +269,53 @@ class User extends BaseUser
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
     }
 }

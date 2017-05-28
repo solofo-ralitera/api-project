@@ -44,9 +44,16 @@ class Attachment
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date_created", type="datetime")
      */
-    private $date;
+    private $dateCreated;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_modified", type="datetime")
+     */
+    private $dateModified;
 
     /**
      * @var string
@@ -57,13 +64,13 @@ class Attachment
 
     public function __construct()
     {
-        $this->date = new \DateTime();
+        $this->dateCreated = new \DateTime();
+        $this->dateModified = new \DateTime();
     }
 
     public function toArray() {
         return [
             'id' => $this->getId(),
-            'date' => $this->getDate(),
             'name' => $this->getName(),
             'type' => $this->getType()->toArray(),
         ];
@@ -101,30 +108,6 @@ class Attachment
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return Attachment
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
     }
 
     /**
@@ -197,5 +180,53 @@ class Attachment
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set dateCreated
+     *
+     * @param \DateTime $dateCreated
+     *
+     * @return Attachment
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreated
+     *
+     * @return \DateTime
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
+
+    /**
+     * Set dateModified
+     *
+     * @param \DateTime $dateModified
+     *
+     * @return Attachment
+     */
+    public function setDateModified($dateModified)
+    {
+        $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    /**
+     * Get dateModified
+     *
+     * @return \DateTime
+     */
+    public function getDateModified()
+    {
+        return $this->dateModified;
     }
 }
