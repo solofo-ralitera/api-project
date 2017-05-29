@@ -38,7 +38,7 @@ class FollowController extends FOSRestController
         $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
         $return = array();
         if($u = $userRepo->find($user)) {
-            $return = $userRepo->getFollowers($u);
+            $return['data'] = $userRepo->getFollowers($u);
         }
         $view = $this->view($return, Response::HTTP_OK);
         return $this->handleView($view);

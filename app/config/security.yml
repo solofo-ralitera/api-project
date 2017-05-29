@@ -26,6 +26,9 @@ security:
                 username_parameter: _username
                 password_parameter: _password
 
+        avatar:
+            pattern: avatar$
+            security: false
         api:
               provider: fos_userbundle
               pattern: ^/api

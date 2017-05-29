@@ -83,6 +83,8 @@ class User extends BaseUser
             'username' => $this->getUsername(),
             'last_name' => $this->getLastName(),
             'first_name' => $this->getFirstName(),
+            // TODO : order lang
+            'name' => $this->getLastName() . ' ' . $this->getFirstName(),
             'avatar' => $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . '/api/users/'.$this->getId().'/avatar',
         ];
     }
