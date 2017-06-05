@@ -4,11 +4,13 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\AttachmentType;
 use AppBundle\Entity\PublicationType;
+use Faker\Factory;
 use FOS\UserBundle\Model\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 
 class DefaultController extends Controller
 {
@@ -85,6 +87,23 @@ class DefaultController extends Controller
             $user->setEnabled(1);
             $user->setRoles( array(User::ROLE_DEFAULT) ) ;
             $user->setPlainPassword('demo');
+
+            $userManager->updateUser($user);
+        }
+
+        // Add fake user
+        $faker = Factory::create();
+        for ($i = 0; $i < 30; $i++) {
+            $mail = $faker->email;
+            $name = $faker->userName;
+            $user = $userManager->createUser();
+            $user->setUsername($name);
+            $user->setEmail($mail);
+            $user->setEmailCanonical($mail);
+            $user->setLang('mg-MG');
+            $user->setEnabled(1);
+            $user->setRoles( array(User::ROLE_DEFAULT) ) ;
+            $user->setPlainPassword($name);
 
             $userManager->updateUser($user);
         }

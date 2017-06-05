@@ -71,6 +71,7 @@ class ComposerStaticInitcc5d363adbe6048c38a15e6c61be0ef8
         ),
         'F' => 
         array (
+            'Faker\\' => 6,
             'FOS\\UserBundle\\' => 15,
             'FOS\\RestBundle\\' => 15,
         ),
@@ -192,6 +193,10 @@ class ComposerStaticInitcc5d363adbe6048c38a15e6c61be0ef8
         'Incenteev\\ParameterHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/incenteev/composer-parameter-handler',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
         'FOS\\UserBundle\\' => 
         array (

@@ -39,4 +39,17 @@ class UserController extends FOSRestController
 
         return $this->handleView($view);
     }
+
+    public function getAction() {
+        $ApiSvc = $this->container->get('api.service');
+        $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+        $return = array();
+        if(in_array('ROLE_SUPER_ADMIN', $ApiSvc->getUser()->getRoles())) {
+            $return['data'] = array_map(function($item) {
+                return $item->toArray();
+            }, $userRepo->findAll());
+        }
+        $view = $this->view($return, Response::HTTP_OK);
+        return $this->handleView($view);
+    }
 }

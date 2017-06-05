@@ -55,6 +55,10 @@ api_attachement_delete:
     methods : [DELETE]
 
 # User
+api_users_get:
+    path:  /users
+    defaults: { _controller: "ApiBundle:User:get" }
+    methods : [GET]
 api_publication_type_set:
     path:  /users
     defaults: { _controller: "ApiBundle:User:put" }

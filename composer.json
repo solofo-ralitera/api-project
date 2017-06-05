@@ -26,6 +26,7 @@
         "doctrine/orm": "^2.5",
         "friendsofsymfony/rest-bundle": "^2.2",
         "friendsofsymfony/user-bundle": "^2.0",
+        "fzaninotto/faker": "^1.6",
         "incenteev/composer-parameter-handler": "^2.0",
         "jms/serializer-bundle": "^2.0",
         "lexik/jwt-authentication-bundle": "^2.4",
