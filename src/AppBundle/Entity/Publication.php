@@ -29,13 +29,13 @@ class Publication
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User",  inversedBy="publications")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author", referencedColumnName="id")
      */
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PublicationType",  inversedBy="publications")
+     * @ORM\ManyToOne(targetEntity="PublicationType")
      * @ORM\JoinColumn(name="type", referencedColumnName="id")
      */
     private $type;

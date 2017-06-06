@@ -37,16 +37,11 @@ class AttachmentType
     private $code;
 
     /**
-     * @ORM\OneToMany(targetEntity="Attachment", mappedBy="type")
-     */
-    private $attachments;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->attachments = new ArrayCollection();
+
     }
 
     public function toArray() {
@@ -112,39 +107,5 @@ class AttachmentType
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * Add attachment
-     *
-     * @param \AppBundle\Entity\Attachment $attachment
-     *
-     * @return AttachmentType
-     */
-    public function addAttachment(Attachment $attachment)
-    {
-        $this->attachments[] = $attachment;
-
-        return $this;
-    }
-
-    /**
-     * Remove attachment
-     *
-     * @param \AppBundle\Entity\Attachment $attachment
-     */
-    public function removeAttachment(Attachment $attachment)
-    {
-        $this->attachments->removeElement($attachment);
-    }
-
-    /**
-     * Get attachments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAttachments()
-    {
-        return $this->attachments;
     }
 }

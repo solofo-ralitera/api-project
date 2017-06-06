@@ -23,13 +23,13 @@ class Follow
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User",  inversedBy="followings")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="following", referencedColumnName="id")
      */
     private $following;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User",  inversedBy="followers")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="follower", referencedColumnName="id")
      */
     private $follower;

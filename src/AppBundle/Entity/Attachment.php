@@ -22,14 +22,14 @@ class Attachment
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AttachmentType", inversedBy="attachments")
+     * @ORM\ManyToOne(targetEntity="AttachmentType")
      * @ORM\JoinColumn(name="type", referencedColumnName="id")
      */
     private $type;
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="User",  inversedBy="attachments")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author", referencedColumnName="id")
      */
     private $author;
@@ -73,6 +73,7 @@ class Attachment
             'id' => $this->getId(),
             'name' => $this->getName(),
             'type' => $this->getType()->toArray(),
+            'parameters' => json_decode($this->getParameters(), true),
         ];
     }
 

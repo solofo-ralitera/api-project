@@ -13,20 +13,4 @@ use AppBundle\Entity\User;
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function getFollowers(User $user) {
-        $return = [];
-        foreach($user->getFollowings() as $follow) {
-            $return[] = $follow->getFollower()->toArray();
-        }
-        return $return;
-    }
-
-    public function getFollowings(User $user) {
-        $return = [];
-        foreach($user->getFollowers() as $follow) {
-            $return[] = $follow->getFollowing()->toArray();
-        }
-        return $return;
-    }
-
 }

@@ -39,12 +39,10 @@ class AttachmentController extends FOSRestController
     }
 
     public function getAction() {
-        $ApiSvc = $this->container->get('api.service');
-        $user = $ApiSvc->getUser();
-
-        $view = $this->view($user->getAttachments()->map(function($item) {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Attachment');
+        $view = $this->view(array_map(function($item) {
             return $item->toArray();
-        }), Response::HTTP_OK);
+        }, $repository->findAll()), Response::HTTP_OK);
         return $this->handleView($view);
     }
 

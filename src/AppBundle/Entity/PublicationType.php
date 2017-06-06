@@ -37,16 +37,11 @@ class PublicationType
     private $code;
 
     /**
-     * @ORM\OneToMany(targetEntity="Publication", mappedBy="type")
-     */
-    private $publications;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->publications = new ArrayCollection();
+
     }
 
     public function toArray() {
@@ -89,40 +84,6 @@ class PublicationType
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Add publication
-     *
-     * @param \AppBundle\Entity\Publication $publication
-     *
-     * @return PublicationType
-     */
-    public function addPublication(Publication $publication)
-    {
-        $this->publications[] = $publication;
-
-        return $this;
-    }
-
-    /**
-     * Remove publication
-     *
-     * @param \AppBundle\Entity\Publication $publication
-     */
-    public function removePublication(Publication $publication)
-    {
-        $this->publications->removeElement($publication);
-    }
-
-    /**
-     * Get publications
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPublications()
-    {
-        return $this->publications;
     }
 
     /**

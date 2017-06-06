@@ -46,7 +46,7 @@ class UserController extends FOSRestController
         $return = array();
         if(in_array('ROLE_SUPER_ADMIN', $ApiSvc->getUser()->getRoles())) {
             $return['data'] = array_map(function($item) {
-                return $item->toArray();
+                return $item;
             }, $userRepo->findAll());
         }
         $view = $this->view($return, Response::HTTP_OK);

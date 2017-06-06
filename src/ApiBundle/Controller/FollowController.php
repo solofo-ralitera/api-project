@@ -36,9 +36,10 @@ class FollowController extends FOSRestController
 
     public function getFollowersAction(int $user) {
         $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+        $followRepo = $this->getDoctrine()->getRepository('AppBundle:Follow');
         $return = array();
         if($u = $userRepo->find($user)) {
-            $return['data'] = $userRepo->getFollowers($u);
+            $return['data'] = $followRepo->getFollowers($u);
         }
         $view = $this->view($return, Response::HTTP_OK);
         return $this->handleView($view);
@@ -46,9 +47,10 @@ class FollowController extends FOSRestController
 
     public function getFollowingsAction(int $user) {
         $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+        $followRepo = $this->getDoctrine()->getRepository('AppBundle:Follow');
         $return = array();
         if($u = $userRepo->find($user)) {
-            $return = $userRepo->getFollowings($u);
+            $return = $followRepo->getFollowings($u);
         }
         $view = $this->view($return, Response::HTTP_OK);
         return $this->handleView($view);
