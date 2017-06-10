@@ -1,1 +1,9 @@
 services:
+  app.user_provider:
+    class: AppBundle\Services\UserProvider
+    arguments: ['@doctrine.orm.entity_manager']
+
+  jwt_token_authenticator.event.authentication_success_listener:
+    class: AppBundle\EventListener\JwtAuthenticationListener
+    tags:
+      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }

@@ -6,7 +6,9 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
-
+        user_provider:
+          id: app.user_provider
+            #entity: { class: AppBundle\Services\UserProvider }
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -18,7 +20,7 @@ security:
             stateless: true
             anonymous: true
             form_login:
-                #provider: fos_userbundle
+                provider: user_provider
                 check_path:               /api/login_check
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
@@ -30,7 +32,6 @@ security:
             pattern: avatar$
             security: false
         api:
-              provider: fos_userbundle
               pattern: ^/api
               stateless: true
               lexik_jwt:
@@ -40,14 +41,14 @@ security:
                   query_parameter:
                       enabled: true
                       name: bearer
-              guard:
-                  authenticators:
-                      - lexik_jwt_authentication.jwt_token_authenticator
+              #guard:
+              #    authenticators:
+              #        - lexik_jwt_authentication.jwt_token_authenticator
 
         main:
            pattern: ^/
            form_login:
-               provider: fos_userbundle
+               provider: user_provider
                check_path: /login_check
                login_path: /login
            logout:

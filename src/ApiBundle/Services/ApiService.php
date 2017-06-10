@@ -26,18 +26,12 @@ class ApiService
 
     public function getUser()
     {
-        $repository = $this->em->getRepository('AppBundle:User');
-        return $repository->findOneBy([
-            'username' => 'admin'
-        ]);
-        /*
         $token = $this->tokenStorage->getToken();
         if ($token instanceof JWTUserToken) {
             return $token->getUser();
         } else {
             return null;
         }
-        */
     }
 
     public function getRequestContent() {
