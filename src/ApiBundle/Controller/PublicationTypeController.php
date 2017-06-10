@@ -30,8 +30,9 @@ class PublicationTypeController extends FOSRestController
         }
         $em->flush();
 
-        $view = $this->view(null, Response::HTTP_NO_CONTENT);
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view(null, Response::HTTP_NO_CONTENT)
+        );
     }
 
     public function getAction() {
@@ -54,8 +55,9 @@ class PublicationTypeController extends FOSRestController
         }
         $em->flush();
 
-        $view = $this->view(null, Response::HTTP_NO_CONTENT);
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view(null, Response::HTTP_NO_CONTENT)
+        );
     }
 
 }

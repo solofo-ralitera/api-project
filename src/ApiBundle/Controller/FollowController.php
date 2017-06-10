@@ -30,8 +30,9 @@ class FollowController extends FOSRestController
             }
             $em->flush();
         }
-        $view = $this->view(null, Response::HTTP_NO_CONTENT);
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view(null, Response::HTTP_NO_CONTENT)
+        );
     }
 
     public function getFollowersAction(int $user) {
@@ -41,8 +42,9 @@ class FollowController extends FOSRestController
         if($u = $userRepo->find($user)) {
             $return['data'] = $followRepo->getFollowers($u);
         }
-        $view = $this->view($return, Response::HTTP_OK);
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view($return, Response::HTTP_OK)
+        );
     }
 
     public function getFollowingsAction(int $user) {
@@ -52,8 +54,7 @@ class FollowController extends FOSRestController
         if($u = $userRepo->find($user)) {
             $return = $followRepo->getFollowings($u);
         }
-        $view = $this->view($return, Response::HTTP_OK);
-        return $this->handleView($view);
+        return $this->handleView($this->view($return, Response::HTTP_OK));
     }
 
     public function deleteFollowingsAction(int $user) {
@@ -76,8 +77,9 @@ class FollowController extends FOSRestController
             }
             $em->flush();
         }
-        $view = $this->view(null, Response::HTTP_NO_CONTENT);
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view(null, Response::HTTP_NO_CONTENT)
+        );
     }
 
 }

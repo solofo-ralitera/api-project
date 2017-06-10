@@ -34,13 +34,12 @@ class UserProvider implements UserProviderInterface
     {
         $repo = $this->em->getRepository('AppBundle:User');
         try {
-            $user = $repo->findOneBy([
+            return $repo->findOneBy([
                 'username' => $username,
             ]);
         } catch (NoResultException $e) {
             throw new UsernameNotFoundException();
         }
-        return $user;
     }
 
     /**

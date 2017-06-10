@@ -25,15 +25,15 @@ class PlayListController extends FOSRestController
                 "image" => "coverart.jpg"
             ];
         }
-        $view = $this->view($playlist, Response::HTTP_OK);
-
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view($playlist, Response::HTTP_OK)
+        );
     }
 
     public function setAction()
     {
-
-        $view = $this->view([], Response::HTTP_NO_CONTENT);
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view([], Response::HTTP_NO_CONTENT)
+        );
     }
 }

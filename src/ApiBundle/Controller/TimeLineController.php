@@ -25,8 +25,9 @@ class TimeLineController extends FOSRestController
                 "image" => "coverart.jpg"
             ];
         }
-        $view = $this->view($playlist, Response::HTTP_OK);
 
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view($playlist, Response::HTTP_OK)
+        );
     }
 }

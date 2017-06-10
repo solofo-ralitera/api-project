@@ -16,8 +16,9 @@ class UserPublicationsController extends FOSRestController
 
     public function putAction(int $user)
     {
-        $view = $this->view(null, Response::HTTP_NO_CONTENT);
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view(null, Response::HTTP_NO_CONTENT)
+        );
     }
 
     public function getAction(int $user) {
@@ -28,13 +29,15 @@ class UserPublicationsController extends FOSRestController
                 return $item->toArray();
             });
         }
-        $view = $this->view($return, Response::HTTP_OK);
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view($return, Response::HTTP_OK)
+        );
     }
 
     public function deleteAction(int $user) {
-        $view = $this->view(null, Response::HTTP_NO_CONTENT);
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view(null, Response::HTTP_NO_CONTENT)
+        );
     }
 
 }

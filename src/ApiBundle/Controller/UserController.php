@@ -35,9 +35,9 @@ class UserController extends FOSRestController
                 $userManager->updateUser($u);
             }
         }
-        $view = $this->view(null, Response::HTTP_NO_CONTENT);
-
-        return $this->handleView($view);
+        return $this->handleView(
+            $this->view(null, Response::HTTP_NO_CONTENT)
+        );
     }
 
     public function getAction() {
@@ -46,10 +46,12 @@ class UserController extends FOSRestController
         $return = array();
         if(in_array('ROLE_SUPER_ADMIN', $ApiSvc->getUser()->getRoles())) {
             $return['data'] = array_map(function($item) {
-                return $item;
+                return $item->toArray();
             }, $userRepo->findAll());
         }
-        $view = $this->view($return, Response::HTTP_OK);
-        return $this->handleView($view);
+
+        return $this->handleView(
+            $this->view($return, Response::HTTP_OK)
+        );
     }
 }
