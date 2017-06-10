@@ -62,6 +62,11 @@ class Attachment
      */
     private $parameters;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Comment", cascade={"persist"})
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->dateCreated = new \DateTime();
@@ -229,5 +234,39 @@ class Attachment
     public function getDateModified()
     {
         return $this->dateModified;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Attachment
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

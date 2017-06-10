@@ -59,6 +59,11 @@ class Publication
      */
     private $attachments;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Comment", cascade={"persist"})
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->lang = 'mg-MG';
@@ -239,5 +244,39 @@ class Publication
     public function getAttachments()
     {
         return $this->attachments;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Publication
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
