@@ -58,6 +58,14 @@ class Comment
      */
     private $attachments;
 
+    public function toArray() {
+        return [
+            'id' => $this->getId(),
+            'text' => $this->getText(),
+            'author' => $this->getAuthor()->toArray(),
+        ];
+    }
+
     /**
      * Get id
      *

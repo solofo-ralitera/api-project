@@ -1,3 +1,6 @@
 api_rest_users:
     type:     rest
     resource: ApiBundle\Controller\rest\UserController
+api_rest_attachments:
+    type:     rest
+    resource: ApiBundle\Controller\rest\AttachmentController
