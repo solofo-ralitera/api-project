@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiBundle\Controller;
+namespace ApiBundle\Controller\custom;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;

@@ -39,6 +39,8 @@ class UserProvider implements UserProviderInterface
             ]);
         } catch (NoResultException $e) {
             throw new UsernameNotFoundException();
+        } catch (\Exception $e) {
+            throw new UnsupportedUserException();
         }
     }
 

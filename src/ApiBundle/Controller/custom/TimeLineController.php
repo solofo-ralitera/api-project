@@ -1,18 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: popolos
- * Date: 21/05/2017
- * Time: 19:38
- */
 
-namespace ApiBundle\Controller;
+namespace ApiBundle\Controller\custom;
 
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 
-class PlayListController extends FOSRestController
+class TimeLineController extends FOSRestController
 {
     public function getAction()
     {
@@ -25,15 +19,9 @@ class PlayListController extends FOSRestController
                 "image" => "coverart.jpg"
             ];
         }
+
         return $this->handleView(
             $this->view($playlist, Response::HTTP_OK)
-        );
-    }
-
-    public function setAction()
-    {
-        return $this->handleView(
-            $this->view([], Response::HTTP_NO_CONTENT)
         );
     }
 }

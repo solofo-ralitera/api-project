@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: popolos
- * Date: 21/05/2017
- * Time: 19:38
- */
 
-namespace ApiBundle\Controller;
+namespace ApiBundle\Controller\custom;
 
 use AppBundle\Entity\Follow;
 use FOS\RestBundle\Controller\FOSRestController;

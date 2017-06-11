@@ -1,0 +1,121 @@
+api_custom_default:
+    path:  /default
+    defaults: { _controller: "ApiBundle:custom/Default:index" }
+
+api_custom_playlist_get:
+    path:  /playlist
+    defaults: { _controller: "ApiBundle:custom/PlayList:get" }
+    methods : [GET]
+
+api_custom_playlist_set:
+    path:  /playlist
+    defaults: { _controller: "ApiBundle:custom/PlayList:set" }
+    methods : [PUT]
+
+# Publication type
+api_custom_publication_type_set:
+    path:  /publications/type
+    defaults: { _controller: "ApiBundle:custom/PublicationType:put" }
+    methods : [PUT]
+api_custom_publication_type_get:
+    path:  /publications/type
+    defaults: { _controller: "ApiBundle:custom/PublicationType:get" }
+    methods : [GET]
+api_custom_publication_type_delete:
+    path:  /publications/type
+    defaults: { _controller: "ApiBundle:custom/PublicationType:delete" }
+    methods : [DELETE]
+
+# Publications
+api_custom_publication_set:
+    path:  /publications
+    defaults: { _controller: "ApiBundle:custom/Publication:put" }
+    methods : [PUT]
+api_custom_publication_get:
+    path:  /publications
+    defaults: { _controller: "ApiBundle:custom/Publication:get" }
+    methods : [GET]
+api_custom_publication_delete:
+    path:  /publications
+    defaults: { _controller: "ApiBundle:custom/Publication:delete" }
+    methods : [DELETE]
+
+# Attachment
+api_custom_attachement_set:
+    path:  /attachments
+    defaults: { _controller: "ApiBundle:custom/Attachment:put" }
+    methods : [PUT]
+api_custom_attachement_get:
+    path:  /attachments
+    defaults: { _controller: "ApiBundle:custom/Attachment:get" }
+    methods : [GET]
+api_custom_attachement_delete:
+    path:  /attachments
+    defaults: { _controller: "ApiBundle:custom/Attachment:delete" }
+    methods : [DELETE]
+
+# User
+api_custom_users_get:
+    path:  /users
+    defaults: { _controller: "ApiBundle:custom/User:get" }
+    methods : [GET]
+api_custom_publication_type_set:
+    path:  /users
+    defaults: { _controller: "ApiBundle:custom/User:put" }
+    methods : [PUT]
+# User Follow
+api_custom_follower_set:
+    path:  /users/{user}/followers
+    defaults: { _controller: "ApiBundle:custom/Follow:putFollowers", user: 0 }
+    requirements:
+        user: '\d+'
+    methods : [PUT]
+api_custom_follower_get:
+    path:  /users/{user}/followers
+    defaults: { _controller: "ApiBundle:custom/Follow:getFollowers", user: 0 }
+    requirements:
+        user: '\d+'
+    methods : [GET]
+api_custom_following_get:
+    path:  /users/{user}/followings
+    defaults: { _controller: "ApiBundle:custom/Follow:getFollowings", user: 0 }
+    requirements:
+        user: '\d+'
+    methods : [GET]
+api_custom_following_delete:
+    path:  /users/{user}/followings
+    defaults: { _controller: "ApiBundle:custom/Follow:deleteFollowings", user: 0 }
+    requirements:
+        user: '\d+'
+    methods : [delete]
+# User Publications
+api_custom_user_publications_get:
+    path:  /users/{user}/publications
+    defaults: { _controller: "ApiBundle:custom/UserPublications:get" }
+    methods : [GET]
+    requirements:
+        user: '\d+'
+# User Avatar
+api_custom_user_avatar_set:
+    path:  /users/{user}/avatar
+    defaults: { _controller: "ApiBundle:custom/UserAvatar:put" }
+    methods : [PUT]
+    requirements:
+        user: '\d+'
+api_custom_user_avatar_get:
+    path:  /users/{user}/avatar
+    defaults: { _controller: "ApiBundle:custom/UserAvatar:get" }
+    methods : [GET]
+    requirements:
+        user: '\d+'
+
+# TimeLine
+api_custom_timeline_get:
+    path:  /timelines
+    defaults: { _controller: "ApiBundle:custom/TimeLine:get" }
+    methods : [GET]
+
+api_custom_timeline_set:
+    path:  /timelines
+    defaults: { _controller: "ApiBundle:custom/TimeLine:set" }
+    methods : [PUT]
