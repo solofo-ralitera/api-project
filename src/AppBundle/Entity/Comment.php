@@ -59,10 +59,14 @@ class Comment
     private $attachments;
 
     public function toArray() {
+        $parentId = $this->getId();
         return [
             'id' => $this->getId(),
             'text' => $this->getText(),
             'author' => $this->getAuthor()->toArray(),
+            'comments' => $this->getComments()->map(function(Comment $comment) use($parentId) {
+                return $parentId != $comment->getId() ? $comment->toArray() : [];
+            })
         ];
     }
 
