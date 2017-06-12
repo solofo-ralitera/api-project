@@ -23,44 +23,29 @@ class UserController extends FOSRestController implements ClassResourceInterface
     public function getAction(int $id)
     {
         return $this->getDoctrine()->getRepository('AppBundle:User')
-            ->find($id)->toArray();
+            ->find($id)
+            ->toArray();
     }
 
     public function getFollowersAction(int $userId)
     {
-        $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-        if($u = $userRepo->find($userId)) {
-            return $this->getDoctrine()->getRepository('AppBundle:Follow')
-                ->getFollowers($u);
-        }
+        return $this->getDoctrine()->getRepository('AppBundle:Follow')->getFollowers(
+            $this->getDoctrine()->getRepository('AppBundle:User')->find($userId)
+        );
     }
 
     public function getFollowingsAction(int $userId)
     {
-        $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-        if($u = $userRepo->find($userId)) {
-            return $this->getDoctrine()->getRepository('AppBundle:Follow')
-                ->getFollowings($u);
-        }
+        return $this->getDoctrine()->getRepository('AppBundle:Follow')->getFollowings(
+            $this->getDoctrine()->getRepository('AppBundle:User')->find($userId)
+        );
     }
 
     public function getAvatarAction(int $userId)
     {
-        $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-        $image = $this->container->getParameter('api.user.avatar.path') . 'default.png';
-        if($u = $userRepo->find($userId)) {
-            if($avatar = $u->getAvatar()) {
-                $parameter = json_decode($avatar->getParameters(), true);
-                if($parameter && isset($parameter['path']) && file_exists($parameter['path'])) {
-                    $image = $parameter['path'];
-                }
-            }
-        }
-        $response = $this->view()->getResponse();
-        $response->headers->set('Content-Disposition', $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_INLINE, 'avatar.png'));
-        $response->headers->set('Content-Type', 'image/png');
-        $response->sendHeaders();
-        readfile($image);
-        return $response;
+        return $this->get('api.attachement')->download(
+            $this->getDoctrine()->getRepository('AppBundle:User')->find($userId)->getAvatar(),
+            $this->container->getParameter('api.user.avatar.path') . 'default.png'
+        );
     }
 }

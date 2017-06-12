@@ -2,3 +2,6 @@ services:
     api.service:
         class:     ApiBundle\Services\ApiService
         autowire: true
+    api.attachement:
+        class:     ApiBundle\Services\AttachmentService
+        autowire: true

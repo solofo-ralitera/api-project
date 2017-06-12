@@ -21,8 +21,12 @@ class AttachmentController extends FOSRestController implements ClassResourceInt
 
     public function getAction(int $id)
     {
-        return $this->getDoctrine()->getRepository('AppBundle:Attachment')
-            ->find($id)->toArray();
+        $attachment = $this->getDoctrine()->getRepository('AppBundle:Attachment')->find($id);
+        if($attachment->getType()->getCode() == 'PCT') {
+            return $this->get('api.attachement')->download($attachment);
+        }else {
+            return $attachment->toArray();
+        }
     }
 
     public function getCommentsAction(int $id)

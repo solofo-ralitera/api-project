@@ -2,6 +2,7 @@
 
 namespace ApiBundle\Services;
 
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -24,8 +25,7 @@ class ApiService
         $this->em = $entityManager;
     }
 
-    public function getUser()
-    {
+    public function getUser(): User {
         $token = $this->tokenStorage->getToken();
         if ($token instanceof JWTUserToken) {
             return $token->getUser();
@@ -34,12 +34,12 @@ class ApiService
         }
     }
 
-    public function getRequestContent() {
+    public function getRequestContent(): array {
         $request = $this->requestStack->getCurrentRequest();
         return json_decode($request->getContent(), true);
     }
 
-    public function getUploadedFile() {
+    public function getUploadedFile(): string {
         // TODO : cas if file sent in form
         return $this->requestStack->getCurrentRequest()->getContent();
     }
