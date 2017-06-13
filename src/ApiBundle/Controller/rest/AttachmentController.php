@@ -2,10 +2,13 @@
 
 namespace ApiBundle\Controller\rest;
 
+use AppBundle\Entity\Attachment;
+use AppBundle\Entity\AttachmentType;
 use AppBundle\Entity\Comment;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\Request;
 
 class AttachmentController extends FOSRestController implements ClassResourceInterface
 {
@@ -19,9 +22,8 @@ class AttachmentController extends FOSRestController implements ClassResourceInt
         });
     }
 
-    public function getAction(int $id)
+    public function getAction(Attachment $attachment)
     {
-        $attachment = $this->getDoctrine()->getRepository('AppBundle:Attachment')->find($id);
         if($attachment->getType()->getCode() == 'PCT') {
             return $this->get('api.attachement')->download($attachment);
         }else {

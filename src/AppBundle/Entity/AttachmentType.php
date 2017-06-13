@@ -2,7 +2,7 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +26,7 @@ class AttachmentType
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=15)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -33,6 +34,7 @@ class AttachmentType
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=5, unique=true)
+     * @Assert\NotBlank()
      */
     private $code;
 

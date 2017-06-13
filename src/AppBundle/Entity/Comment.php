@@ -61,7 +61,7 @@ class Comment
     public function toArray() {
         $parentId = $this->getId();
         return [
-            'id' => $this->getId(),
+            'id' => $parentId,
             'text' => $this->getText(),
             'author' => $this->getAuthor()->toArray(),
             'comments' => $this->getComments()->map(function(Comment $comment) use($parentId) {

@@ -6,7 +6,6 @@ use AppBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class UserController extends FOSRestController implements ClassResourceInterface
 {
@@ -20,11 +19,9 @@ class UserController extends FOSRestController implements ClassResourceInterface
         });
     }
 
-    public function getAction(int $id)
+    public function getAction(User $user)
     {
-        return $this->getDoctrine()->getRepository('AppBundle:User')
-            ->find($id)
-            ->toArray();
+        return $user->toArray();
     }
 
     public function getFollowersAction(int $userId)

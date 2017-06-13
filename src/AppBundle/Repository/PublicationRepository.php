@@ -13,8 +13,7 @@ use AppBundle\Entity\Publication;
 class PublicationRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getNew(array $publication) {
-        $pub = new Publication();
-        return $pub
+        return (new Publication())
             ->setStatus($publication['status'])
             ->setAuthor($publication['author'])
             ->setType($publication['type'])

@@ -1,6 +1,15 @@
 api_rest_users:
     type:     rest
     resource: ApiBundle\Controller\rest\UserController
+api_rest_attachments_type:
+    type:     rest
+    resource: ApiBundle\Controller\rest\AttachmentTypeController
 api_rest_attachments:
     type:     rest
     resource: ApiBundle\Controller\rest\AttachmentController
+api_rest_publications:
+    type:     rest
+    resource: ApiBundle\Controller\rest\PublicationsController
+api_rest_comments:
+    type:     rest
+    resource: ApiBundle\Controller\rest\CommentsController

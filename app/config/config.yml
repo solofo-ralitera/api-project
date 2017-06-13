@@ -99,7 +99,11 @@ lexik_jwt_authentication:
 # FOSRestBundle
 fos_rest:
     param_fetcher_listener: true
-    body_listener: true
+    body_listener:
+        decoders:
+            json: fos_rest.decoder.json
+            xml: fos_rest.decoder.xml
+        array_normalizer: fos_rest.normalizer.camel_keys
     format_listener: true
     body_converter:
         enabled: true
