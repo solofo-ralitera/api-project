@@ -48,10 +48,7 @@ class AttachmentController extends FOSRestController implements ClassResourceInt
      * @return array
      */
     public function postAction(Request $request) : array {
-        $attachment = (new Attachment())
-            ->setAuthor($this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:User')->find($request->get('author')))
-            ->setType($this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:AttachmentType')->find($request->get('type')));
-
+        $attachment = new Attachment();
         if (! $this->createForm(\AppBundle\Form\Attachment::class, $attachment)->submit($request->request->all())->isValid())
             throw new BadRequestHttpException();
 
