@@ -79,7 +79,8 @@ class Attachment
             'name' => $this->getName(),
             'type' => $this->getType()->toArray(),
             'parameters' => json_decode($this->getParameters(), true) ?? [],
-            'author' => $this->getAuthor()->toArray()
+            'author' => $this->getAuthor()->toArray(),
+            'date' => $this->getDateCreated(),
         ];
     }
 

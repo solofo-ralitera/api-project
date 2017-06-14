@@ -9,6 +9,7 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use FOS\RestBundle\Controller\Annotations\View;
 
 class AttachmentController extends FOSRestController implements ClassResourceInterface
 {
@@ -41,6 +42,11 @@ class AttachmentController extends FOSRestController implements ClassResourceInt
             });
     }
 
+    /**
+     * @View(statusCode=201)
+     * @param Request $request
+     * @return array
+     */
     public function postAction(Request $request) : array {
         $attachment = (new Attachment())
             ->setAuthor($this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:User')->find($request->get('author')))
@@ -53,6 +59,7 @@ class AttachmentController extends FOSRestController implements ClassResourceInt
         $em->persist($attachment);
         $em->flush();
         $em->clear();
+        unset($em);
         return $attachment->toArray();
     }
 }

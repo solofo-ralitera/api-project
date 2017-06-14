@@ -52,6 +52,7 @@ class AttachmentTypeController extends FOSRestController implements ClassResourc
         $em->persist($attachmentType);
         $em->flush();
         $em->clear();
+        unset($em);
         return $attachmentType->toArray();
     }
 }
