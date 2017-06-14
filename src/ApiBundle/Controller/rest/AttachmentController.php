@@ -23,7 +23,7 @@ class AttachmentController extends FOSRestController implements ClassResourceInt
 
     public function getAction(Attachment $attachment)
     {
-        switch($attachment->getType()->getCode() == 'PCT') {
+        switch($attachment->getType()->getCode()) {
             case 'PCT':
                 return $this->get('api.attachement')->download($attachment);
             default:
@@ -52,6 +52,7 @@ class AttachmentController extends FOSRestController implements ClassResourceInt
         $em = $this->get('doctrine.orm.entity_manager');
         $em->persist($attachment);
         $em->flush();
+        $em->clear();
         return $attachment->toArray();
     }
 }

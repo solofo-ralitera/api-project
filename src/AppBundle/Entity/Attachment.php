@@ -78,7 +78,7 @@ class Attachment
             'id' => $this->getId(),
             'name' => $this->getName(),
             'type' => $this->getType()->toArray(),
-            'parameters' => json_decode($this->getParameters(), true),
+            'parameters' => json_decode($this->getParameters(), true) ?? [],
             'author' => $this->getAuthor()->toArray()
         ];
     }

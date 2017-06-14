@@ -51,6 +51,7 @@ class AttachmentTypeController extends FOSRestController implements ClassResourc
         $em = $this->get('doctrine.orm.entity_manager');
         $em->persist($attachmentType);
         $em->flush();
+        $em->clear();
         return $attachmentType->toArray();
     }
 }
