@@ -14,7 +14,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class AttachmentTypeController extends FOSRestController implements ClassResourceInterface
 {
-    // ...
 
     /**
      * @Get("/attachmenttypes")
@@ -41,20 +40,17 @@ class AttachmentTypeController extends FOSRestController implements ClassResourc
      * @Post("/attachmenttypes")
      * @View(statusCode=201)
      * @param Request $request
-     * @return AttachmentType
+     * @return array
      */
-    public function postAction(Request $request) : AttachmentType
+    public function postAction(Request $request) : array
     {
         $attachmentType = new AttachmentType();
-        if ($this->createForm(\AppBundle\Form\AttachmentType::class, $attachmentType)
-                ->submit($request->request->all())
-                ->isValid()
-        ) {
-            $em = $this->get('doctrine.orm.entity_manager');
-            $em->persist($attachmentType);
-            $em->flush();
-            return $attachmentType;
-        }
-        throw new BadRequestHttpException();
+        if (! $this->createForm(\AppBundle\Form\AttachmentType::class, $attachmentType)->submit($request->request->all())->isValid())
+            throw new BadRequestHttpException();
+
+        $em = $this->get('doctrine.orm.entity_manager');
+        $em->persist($attachmentType);
+        $em->flush();
+        return $attachmentType->toArray();
     }
 }

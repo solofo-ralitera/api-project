@@ -16,10 +16,10 @@ api_login_check:
 app_bundle:
     resource: "@AppBundle/Resources/config/routing.yml"
 
-api_custom_bundle:
-    resource: "@ApiBundle/Resources/config/custom/routing.yml"
-    prefix: api
-    defaults : {_format: json}
+#api_custom_bundle:
+#    resource: "@ApiBundle/Resources/config/custom/routing.yml"
+#    prefix: api
+#    defaults : {_format: json}
 
 api_rest_bundle:
     type: rest
