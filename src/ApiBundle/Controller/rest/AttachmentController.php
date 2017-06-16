@@ -17,7 +17,7 @@ class AttachmentController extends FOSRestController implements ClassResourceInt
     public function cgetAction()
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Attachment');
-        return (new ArrayCollection($repo->findAll()))->map(function($item) {
+        return (new ArrayCollection($repo->findAll()))->map(function(Attachment $item) {
             return $item->toArray();
         });
     }

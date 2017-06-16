@@ -2,6 +2,7 @@
 
 namespace ApiBundle\Controller\custom;
 
+use AppBundle\Entity\User;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,7 +20,7 @@ class UserPublicationsController extends FOSRestController
         $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
         $return = array();
         if($u = $userRepo->find($user)) {
-            $return = $u->getPublications()->map(function($item) {
+            $return = $u->getPublications()->map(function(User $item) {
                 return $item->toArray();
             });
         }
