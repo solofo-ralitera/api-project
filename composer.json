@@ -1,5 +1,6 @@
 {
     "name": "popolos/api-projet",
+    "description" : "Kozy's Api",
     "license": "proprietary",
     "type": "project",
     "autoload": {

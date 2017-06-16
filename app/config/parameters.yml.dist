@@ -18,4 +18,5 @@ parameters:
     jwt_key_pass_phrase: keydelamortkikill456489
     jwt_token_ttl: 3600
 
+    api.url : 'http://localhost/api-project/web/app_dev.php/rest/'
     api.user.avatar.path: 'D:/projets/blabla/avatar/'
