@@ -2,6 +2,7 @@
 
 namespace ApiBundle\Controller\custom;
 
+use AppBundle\Entity\Publication;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -50,7 +51,7 @@ class PublicationController extends FOSRestController
 
     public function getAction() {
         $repository = $this->getDoctrine()->getRepository('AppBundle:Publication');
-        $view = $this->view(array_map(function($item) {
+        $view = $this->view(array_map(function(Publication $item) {
             return $item->toArray();
         }, $repository->findAll()), Response::HTTP_OK);
         return $this->handleView($view);

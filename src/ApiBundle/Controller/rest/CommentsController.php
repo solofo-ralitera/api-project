@@ -14,7 +14,7 @@ class CommentsController extends FOSRestController implements ClassResourceInter
     public function cgetAction()
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Comment');
-        return (new ArrayCollection($repo->findAll()))->map(function($item) {
+        return (new ArrayCollection($repo->findAll()))->map(function(Comment $item) {
             return $item->toArray();
         });
     }

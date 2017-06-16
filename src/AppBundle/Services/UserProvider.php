@@ -5,6 +5,7 @@ namespace AppBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\User;
+use Doctrine\ORM\NoResultException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;

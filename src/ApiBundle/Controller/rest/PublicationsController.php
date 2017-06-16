@@ -14,7 +14,7 @@ class PublicationsController extends FOSRestController implements ClassResourceI
     public function cgetAction()
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Publication');
-        return (new ArrayCollection($repo->findAll()))->map(function($item) {
+        return (new ArrayCollection($repo->findAll()))->map(function(Publication $item) {
             return $item->toArray();
         });
     }

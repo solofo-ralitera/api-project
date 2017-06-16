@@ -39,7 +39,7 @@ class UserController extends FOSRestController
         $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
         $return = array();
         if(in_array('ROLE_SUPER_ADMIN', $ApiSvc->getUser()->getRoles())) {
-            $return['data'] = array_map(function($item) {
+            $return['data'] = array_map(function(\AppBundle\Entity\User $item) {
                 return $item->toArray();
             }, $userRepo->findAll());
         }

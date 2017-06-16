@@ -3,7 +3,6 @@
 namespace ApiBundle\Controller\custom;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends FOSRestController

@@ -21,7 +21,7 @@ class AttachmentTypeController extends FOSRestController implements ClassResourc
     public function cgetAction()
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:AttachmentType');
-        return (new ArrayCollection($repo->findAll()))->map(function($item) {
+        return (new ArrayCollection($repo->findAll()))->map(function(AttachmentType $item) {
             return $item->toArray();
         });
     }

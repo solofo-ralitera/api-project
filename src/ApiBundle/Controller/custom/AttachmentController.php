@@ -2,6 +2,7 @@
 
 namespace ApiBundle\Controller\custom;
 
+use AppBundle\Entity\Attachment;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,7 +36,7 @@ class AttachmentController extends FOSRestController
 
     public function getAction() {
         $repository = $this->getDoctrine()->getRepository('AppBundle:Attachment');
-        $view = $this->view(array_map(function($item) {
+        $view = $this->view(array_map(function(Attachment $item) {
             return $item->toArray();
         }, $repository->findAll()), Response::HTTP_OK);
         return $this->handleView($view);
