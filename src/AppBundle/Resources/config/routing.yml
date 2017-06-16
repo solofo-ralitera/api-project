@@ -20,4 +20,4 @@ fos_user_change_password:
 app_init_api:
     path:  /initapi
     defaults: { _controller: "AppBundle:Default:init" }
-    methods : [GET]
+    methods : [POST]
