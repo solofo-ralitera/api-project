@@ -9,9 +9,8 @@ use FOS\RestBundle\Controller\FOSRestController;
 
 class UserController extends FOSRestController implements ClassResourceInterface
 {
-    // ...
 
-    public function cgetAction()
+    public function cgetAction() : ArrayCollection
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:User');
         return (new ArrayCollection($repo->findAll()))->map(function(User $item) {
@@ -19,19 +18,19 @@ class UserController extends FOSRestController implements ClassResourceInterface
         });
     }
 
-    public function getAction(User $user)
+    public function getAction(User $user) : array
     {
         return $user->toArray();
     }
 
-    public function getFollowersAction(int $userId)
+    public function getFollowersAction(int $userId) : array
     {
         return $this->getDoctrine()->getRepository('AppBundle:Follow')->getFollowers(
             $this->getDoctrine()->getRepository('AppBundle:User')->find($userId)
         );
     }
 
-    public function getFollowingsAction(int $userId)
+    public function getFollowingsAction(int $userId) : array
     {
         return $this->getDoctrine()->getRepository('AppBundle:Follow')->getFollowings(
             $this->getDoctrine()->getRepository('AppBundle:User')->find($userId)

@@ -2,9 +2,9 @@
 
 namespace ApiBundle\Controller\rest;
 
-use AppBundle\Entity\Attachment;
-use AppBundle\Entity\Comment;
+use AppBundle\Entity\{Attachment, Comment};
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +14,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 class AttachmentController extends FOSRestController implements ClassResourceInterface
 {
 
-    public function cgetAction()
+    public function cgetAction() : ArrayCollection
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Attachment');
         return (new ArrayCollection($repo->findAll()))->map(function(Attachment $item) {
@@ -32,7 +32,7 @@ class AttachmentController extends FOSRestController implements ClassResourceInt
         }
     }
 
-    public function getCommentsAction(int $id)
+    public function getCommentsAction(int $id) : Collection
     {
         return $this->getDoctrine()->getRepository('AppBundle:Attachment')
             ->find($id)

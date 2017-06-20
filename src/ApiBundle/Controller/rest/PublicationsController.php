@@ -11,7 +11,7 @@ class PublicationsController extends FOSRestController implements ClassResourceI
 {
     // ...
 
-    public function cgetAction()
+    public function cgetAction() : ArrayCollection
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Publication');
         return (new ArrayCollection($repo->findAll()))->map(function(Publication $item) {
@@ -19,7 +19,7 @@ class PublicationsController extends FOSRestController implements ClassResourceI
         });
     }
 
-    public function getAction(Publication $publication)
+    public function getAction(Publication $publication) : array
     {
         return $publication->toArray();
     }

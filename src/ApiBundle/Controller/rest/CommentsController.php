@@ -11,7 +11,7 @@ class CommentsController extends FOSRestController implements ClassResourceInter
 {
     // ...
 
-    public function cgetAction()
+    public function cgetAction() : ArrayCollection
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Comment');
         return (new ArrayCollection($repo->findAll()))->map(function(Comment $item) {
@@ -19,7 +19,7 @@ class CommentsController extends FOSRestController implements ClassResourceInter
         });
     }
 
-    public function getAction(Comment $comment)
+    public function getAction(Comment $comment) : array
     {
         return $comment->toArray();
     }

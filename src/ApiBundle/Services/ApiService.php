@@ -113,7 +113,7 @@ class ApiService
         }
     }
 
-    public function getUser(): User {
+    public function getUser(): ?User {
         $token = $this->tokenStorage->getToken();
         if ($token instanceof JWTUserToken) {
             return $token->getUser();

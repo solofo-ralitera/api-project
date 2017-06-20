@@ -23,6 +23,5 @@ class ApiInitCommand extends ContainerAwareCommand
             'fakeuser' => (int) $input->getArgument('fakeuser'),
             'userManager' => $this->getContainer()->get('fos_user.user_manager')
         ]);
-
     }
 }
