@@ -12,6 +12,9 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class CommentsController extends FOSRestController implements ClassResourceInterface
 {
+    /**
+     * @return ArrayCollection
+     */
     public function cgetAction() : ArrayCollection
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Comment');
@@ -20,6 +23,10 @@ class CommentsController extends FOSRestController implements ClassResourceInter
         });
     }
 
+    /**
+     * @param Comment $comment
+     * @return array
+     */
     public function getAction(Comment $comment) : array
     {
         return $comment->toArray();
@@ -45,12 +52,7 @@ class CommentsController extends FOSRestController implements ClassResourceInter
 
     public function getCommentsAction(int $id) : ArrayCollection
     {
-        return $this->getDoctrine()->getRepository('AppBundle:Comment')
-            ->find($id)
-            ->getComments()
-            ->map(function(Comment $item) {
-                return $item->toArray();
-            });
+        return $this->get('api.comment')->getEntityComments('AppBundle:Comment', $id);
     }
 
     /**
@@ -64,14 +66,6 @@ class CommentsController extends FOSRestController implements ClassResourceInter
         $comment = new Comment();
         if (! $this->createForm(\AppBundle\Form\Comment::class, $comment)->submit($request->request->all())->isValid())
             throw new BadRequestHttpException();
-
-        $em = $this->get('doctrine.orm.entity_manager');
-        $em->persist($this->getDoctrine()->getRepository('AppBundle:Comment')
-            ->find($id)
-            ->addComment($comment));
-        $em->flush();
-        $em->clear();
-        unset($em);
-        return $comment->toArray();
+        return $this->get('api.comment')->addEntityComment($comment, 'AppBundle:Comment', $id);
     }
 }

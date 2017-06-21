@@ -5,3 +5,6 @@ services:
     api.attachement:
         class:     ApiBundle\Services\AttachmentService
         autowire: true
+    api.comment:
+        class:     ApiBundle\Services\CommentService
+        autowire: true

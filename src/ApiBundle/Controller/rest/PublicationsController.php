@@ -13,7 +13,9 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PublicationsController extends FOSRestController implements ClassResourceInterface
 {
-
+    /**
+     * @return ArrayCollection
+     */
     public function cgetAction() : ArrayCollection
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Publication');
@@ -45,14 +47,13 @@ class PublicationsController extends FOSRestController implements ClassResourceI
         return $entity->toArray();
     }
 
+    /**
+     * @param int $id
+     * @return ArrayCollection
+     */
     public function getCommentsAction(int $id) : ArrayCollection
     {
-        return $this->getDoctrine()->getRepository('AppBundle:Publication')
-            ->find($id)
-            ->getComments()
-            ->map(function(Comment $item) {
-                return $item->toArray();
-            });
+        return $this->get('api.comment')->getEntityComments('AppBundle:Publication', $id);
     }
 
     /**
@@ -66,14 +67,6 @@ class PublicationsController extends FOSRestController implements ClassResourceI
         $comment = new Comment();
         if (! $this->createForm(\AppBundle\Form\Comment::class, $comment)->submit($request->request->all())->isValid())
             throw new BadRequestHttpException();
-
-        $em = $this->get('doctrine.orm.entity_manager');
-        $em->persist($this->getDoctrine()->getRepository('AppBundle:Publication')
-            ->find($id)
-            ->addComment($comment));
-        $em->flush();
-        $em->clear();
-        unset($em);
-        return $comment->toArray();
+        return $this->get('api.comment')->addEntityComment($comment, 'AppBundle:Publication', $id);
     }
 }

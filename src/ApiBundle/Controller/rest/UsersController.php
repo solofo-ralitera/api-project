@@ -10,6 +10,9 @@ use FOS\RestBundle\Controller\FOSRestController;
 class UsersController extends FOSRestController implements ClassResourceInterface
 {
 
+    /**
+     * @return ArrayCollection
+     */
     public function cgetAction() : ArrayCollection
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:User');
@@ -18,11 +21,19 @@ class UsersController extends FOSRestController implements ClassResourceInterfac
         });
     }
 
+    /**
+     * @param User $user
+     * @return array
+     */
     public function getAction(User $user) : array
     {
         return $user->toArray();
     }
 
+    /**
+     * @param int $userId
+     * @return array
+     */
     public function getFollowersAction(int $userId) : array
     {
         return $this->getDoctrine()->getRepository('AppBundle:Follow')->getFollowers(
@@ -30,6 +41,10 @@ class UsersController extends FOSRestController implements ClassResourceInterfac
         );
     }
 
+    /**
+     * @param int $userId
+     * @return array
+     */
     public function getFollowingsAction(int $userId) : array
     {
         return $this->getDoctrine()->getRepository('AppBundle:Follow')->getFollowings(
@@ -37,6 +52,10 @@ class UsersController extends FOSRestController implements ClassResourceInterfac
         );
     }
 
+    /**
+     * @param int $userId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function getAvatarAction(int $userId)
     {
         return $this->get('api.attachement')->download(
