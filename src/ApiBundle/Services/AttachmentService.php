@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class AttachmentService
 {
-    public function download(?Attachment $attachment, string $default='') : Response {
+    public function download(? Attachment $attachment, string $default='') : Response {
         if($attachment && $parameter = json_decode($attachment->getParameters(), true)) {
             if (isset($parameter['path']) && file_exists($parameter['path'])) {
                 $default = $parameter['path'];

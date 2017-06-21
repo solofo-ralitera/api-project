@@ -45,6 +45,17 @@ security:
               #    authenticators:
               #        - lexik_jwt_authentication.jwt_token_authenticator
 
+        rest:
+              pattern: ^/rest
+              stateless: true
+              lexik_jwt:
+                  authorization_header:
+                      enabled: true
+                      prefix:  Bearer
+                  query_parameter:
+                      enabled: true
+                      name: bearer
+
         main:
            pattern: ^/
            form_login:

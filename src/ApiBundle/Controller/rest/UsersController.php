@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
 
-class UserController extends FOSRestController implements ClassResourceInterface
+class UsersController extends FOSRestController implements ClassResourceInterface
 {
 
     public function cgetAction() : ArrayCollection

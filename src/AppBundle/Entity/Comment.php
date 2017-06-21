@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -64,7 +65,7 @@ class Comment
             'id' => $parentId,
             'text' => $this->getText(),
             'author' => $this->getAuthor()->toArray(),
-            'comments' => $this->getComments()->map(function(Comment $comment) use($parentId) {
+            'comments' => ($this->getComments() ?? new ArrayCollection())->map(function(Comment $comment) use($parentId) {
                 return $parentId != $comment->getId() ? $comment->toArray() : [];
             })
         ];
@@ -180,7 +181,9 @@ class Comment
      */
     public function __construct()
     {
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->dateCreation = new \DateTime();
+        $this->dateLastModification = new \DateTime();
     }
 
     /**
@@ -190,7 +193,7 @@ class Comment
      *
      * @return Comment
      */
-    public function addComment(\AppBundle\Entity\Comment $comment)
+    public function addComment(Comment $comment)
     {
         $this->comments[] = $comment;
 
@@ -202,7 +205,7 @@ class Comment
      *
      * @param \AppBundle\Entity\Comment $comment
      */
-    public function removeComment(\AppBundle\Entity\Comment $comment)
+    public function removeComment(Comment $comment)
     {
         $this->comments->removeElement($comment);
     }
@@ -224,7 +227,7 @@ class Comment
      *
      * @return Comment
      */
-    public function addAttachment(\AppBundle\Entity\Attachment $attachment)
+    public function addAttachment(Attachment $attachment)
     {
         $this->attachments[] = $attachment;
 
@@ -236,7 +239,7 @@ class Comment
      *
      * @param \AppBundle\Entity\Attachment $attachment
      */
-    public function removeAttachment(\AppBundle\Entity\Attachment $attachment)
+    public function removeAttachment(Attachment $attachment)
     {
         $this->attachments->removeElement($attachment);
     }

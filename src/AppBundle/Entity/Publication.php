@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,9 +44,9 @@ class Publication
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", length=255)
+     * @ORM\Column(name="content", type="string", length=255)
      */
-    private $status;
+    private $content;
 
     /**
      * @var string
@@ -73,12 +74,15 @@ class Publication
     public function toArray() {
         return [
             'id' => $this->getId(),
-            'status' => $this->getStatus(),
+            'content' => $this->getContent(),
             'date' => $this->getDate(),
             'author' => $this->getAuthor()->toArray(),
-            'attachments' => $this->getAttachments()->map(function($item) {
-                    return $item->toArray();
-                })->toArray(),
+            'attachments' => ($this->getAttachments() ?? new ArrayCollection())->map(function($item) {
+                return $item->toArray();
+            }),
+            'comment' => ($this->getComments() ?? new ArrayCollection())->map(function($item) {
+                return $item->toArray();
+            }),
         ];
     }
 
@@ -90,30 +94,6 @@ class Publication
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set status
-     *
-     * @param string $status
-     *
-     * @return Publication
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
     }
 
     /**
@@ -278,5 +258,29 @@ class Publication
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     *
+     * @return Publication
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 }

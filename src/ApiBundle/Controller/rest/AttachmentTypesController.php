@@ -12,7 +12,7 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class AttachmentTypeController extends FOSRestController implements ClassResourceInterface
+class AttachmentTypesController extends FOSRestController implements ClassResourceInterface
 {
 
     /**
