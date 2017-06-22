@@ -62,7 +62,7 @@ class AttachmentsController extends FOSRestController implements ClassResourceIn
      */
     public function getCommentsAction(int $id) : ArrayCollection
     {
-        return $this->get('api.comment')->getEntityComments('AppBundle:Attachment', $id);
+        return $this->getDoctrine()->getRepository('AppBundle:Comment')->getEntityComments('AppBundle:Attachment', $id);
     }
 
     /**
@@ -76,6 +76,6 @@ class AttachmentsController extends FOSRestController implements ClassResourceIn
         $comment = new Comment();
         if (! $this->createForm(\AppBundle\Form\Comment::class, $comment)->submit($request->request->all())->isValid())
             throw new BadRequestHttpException();
-        return $this->get('api.comment')->addEntityComment($comment, 'AppBundle:Attachment', $id);
+        return $this->getDoctrine()->getRepository('AppBundle:Comment')->addEntityComment($comment, 'AppBundle:Attachment', $id);
     }
 }

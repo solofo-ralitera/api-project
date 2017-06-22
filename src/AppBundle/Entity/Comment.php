@@ -2,8 +2,11 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Interfaces\AttachmentEntityInterface;
+use AppBundle\Interfaces\CommentEntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * Comment
@@ -11,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
  */
-class Comment
+class Comment implements CommentEntityInterface, AttachmentEntityInterface
 {
     /**
      * @var int
@@ -213,9 +216,9 @@ class Comment
     /**
      * Get comments
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return PersistentCollection|\Doctrine\Common\Collections\Collection
      */
-    public function getComments()
+    public function getComments() : PersistentCollection
     {
         return $this->comments;
     }
@@ -247,9 +250,9 @@ class Comment
     /**
      * Get attachments
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return PersistentCollection|\Doctrine\Common\Collections\Collection
      */
-    public function getAttachments()
+    public function getAttachments() : PersistentCollection
     {
         return $this->attachments;
     }

@@ -2,8 +2,11 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Interfaces\AttachmentEntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Interfaces\CommentEntityInterface;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * TimeLine
@@ -11,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="publication")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PublicationRepository")
  */
-class Publication
+class Publication implements CommentEntityInterface, AttachmentEntityInterface
 {
     /**
      * @var int
@@ -77,10 +80,10 @@ class Publication
             'content' => $this->getContent(),
             'date' => $this->getDate(),
             'author' => $this->getAuthor()->toArray(),
-            'attachments' => ($this->getAttachments() ?? new ArrayCollection())->map(function($item) {
+            'attachments' => ($this->getAttachments() ?? new ArrayCollection())->map(function(Attachment $item) {
                 return $item->toArray();
             }),
-            'comment' => ($this->getComments() ?? new ArrayCollection())->map(function($item) {
+            'comment' => ($this->getComments() ?? new ArrayCollection())->map(function(Comment $item) {
                 return $item->toArray();
             }),
         ];
@@ -219,9 +222,9 @@ class Publication
     /**
      * Get attachments
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return PersistentCollection|\Doctrine\Common\Collections\Collection
      */
-    public function getAttachments()
+    public function getAttachments() : PersistentCollection
     {
         return $this->attachments;
     }
@@ -253,9 +256,9 @@ class Publication
     /**
      * Get comments
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return PersistentCollection|\Doctrine\Common\Collections\Collection
      */
-    public function getComments()
+    public function getComments() : PersistentCollection
     {
         return $this->comments;
     }

@@ -2,6 +2,7 @@
 
 namespace ApiBundle\Controller\rest;
 
+use AppBundle\Entity\Attachment;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Publication;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -53,7 +54,7 @@ class PublicationsController extends FOSRestController implements ClassResourceI
      */
     public function getCommentsAction(int $id) : ArrayCollection
     {
-        return $this->get('api.comment')->getEntityComments('AppBundle:Publication', $id);
+        return $this->getDoctrine()->getRepository('AppBundle:Comment')->getEntityComments('AppBundle:Publication', $id);
     }
 
     /**
@@ -67,6 +68,29 @@ class PublicationsController extends FOSRestController implements ClassResourceI
         $comment = new Comment();
         if (! $this->createForm(\AppBundle\Form\Comment::class, $comment)->submit($request->request->all())->isValid())
             throw new BadRequestHttpException();
-        return $this->get('api.comment')->addEntityComment($comment, 'AppBundle:Publication', $id);
+        return $this->getDoctrine()->getRepository('AppBundle:Comment')->addEntityComment($comment, 'AppBundle:Publication', $id);
+    }
+
+    /**
+     * @param int $id
+     * @return ArrayCollection
+     */
+    public function getAttachmentsAction(int $id) : ArrayCollection
+    {
+        return $this->getDoctrine()->getRepository('AppBundle:Attachment')->getEntityAttachments('AppBundle:Publication', $id);
+    }
+
+    /**
+     * @View(statusCode=201)
+     * @param Request $request
+     * @param int $id
+     * @return array
+     */
+    public function postAttachmentsAction(Request $request, int $id) : array
+    {
+        $attachment = new Attachment();
+        if (! $this->createForm(\AppBundle\Form\Attachment::class, $attachment)->submit($request->request->all())->isValid())
+            throw new BadRequestHttpException();
+        return $this->getDoctrine()->getRepository('AppBundle:Attachment')->addEntityAttachment($attachment, 'AppBundle:Publication', $id);
     }
 }
