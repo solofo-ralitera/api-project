@@ -2,7 +2,7 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Interfaces\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -12,7 +12,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User extends BaseUser
+class User extends BaseUser implements EntityInterface
 {
     /**
      * @ORM\Id
@@ -53,7 +53,8 @@ class User extends BaseUser
         parent::__construct();
     }
 
-    public function toArray() {
+    public function toArray() : array
+    {
         return [
             'id' => $this->getId(),
             'username' => $this->getUsername(),

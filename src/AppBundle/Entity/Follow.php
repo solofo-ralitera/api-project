@@ -2,7 +2,7 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Interfaces\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="follow")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FollowRepository")
  */
-class Follow
+class Follow implements EntityInterface
 {
     /**
      * @var int
@@ -34,7 +34,8 @@ class Follow
      */
     private $follower;
 
-    public function toArray() {
+    public function toArray() : array
+    {
         return [
             'following' => $this->getFollowing()->toArray(),
             'follower' => $this->getFollower()->toArray(),

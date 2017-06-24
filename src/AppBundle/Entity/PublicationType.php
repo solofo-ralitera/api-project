@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Interfaces\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="publication_type")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PublicationTypeRepository")
  */
-class PublicationType
+class PublicationType implements EntityInterface
 {
     /**
      * @var int
@@ -43,7 +44,8 @@ class PublicationType
 
     }
 
-    public function toArray() {
+    public function toArray() : array
+    {
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),

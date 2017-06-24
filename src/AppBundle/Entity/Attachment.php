@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Interfaces\CommentEntityInterface;
+use AppBundle\Interfaces\EntityInterface;
 use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="attachment")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AttachmentRepository")
  */
-class Attachment implements CommentEntityInterface
+class Attachment implements EntityInterface, CommentEntityInterface
 {
     /**
      * @var int
@@ -75,7 +76,8 @@ class Attachment implements CommentEntityInterface
         $this->dateModified = new \DateTime();
     }
 
-    public function toArray() {
+    public function toArray() : array
+    {
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),

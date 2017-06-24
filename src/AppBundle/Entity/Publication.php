@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Interfaces\AttachmentEntityInterface;
+use AppBundle\Interfaces\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Interfaces\CommentEntityInterface;
@@ -14,7 +15,7 @@ use Doctrine\ORM\PersistentCollection;
  * @ORM\Table(name="publication")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PublicationRepository")
  */
-class Publication implements CommentEntityInterface, AttachmentEntityInterface
+class Publication implements EntityInterface, CommentEntityInterface, AttachmentEntityInterface
 {
     /**
      * @var int
@@ -74,7 +75,8 @@ class Publication implements CommentEntityInterface, AttachmentEntityInterface
         $this->date = new \DateTime();
     }
 
-    public function toArray() {
+    public function toArray() : array
+    {
         return [
             'id' => $this->getId(),
             'content' => $this->getContent(),

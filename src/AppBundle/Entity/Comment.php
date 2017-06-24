@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use AppBundle\Interfaces\AttachmentEntityInterface;
 use AppBundle\Interfaces\CommentEntityInterface;
+use AppBundle\Interfaces\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
@@ -14,7 +15,7 @@ use Doctrine\ORM\PersistentCollection;
  * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
  */
-class Comment implements CommentEntityInterface, AttachmentEntityInterface
+class Comment implements EntityInterface, CommentEntityInterface, AttachmentEntityInterface
 {
     /**
      * @var int
@@ -62,7 +63,8 @@ class Comment implements CommentEntityInterface, AttachmentEntityInterface
      */
     private $attachments;
 
-    public function toArray() {
+    public function toArray() : array
+    {
         $parentId = $this->getId();
         return [
             'id' => $parentId,

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Interfaces\EntityInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="attachment_type")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AttachmentTypeRepository")
  */
-class AttachmentType
+class AttachmentType implements EntityInterface
 {
     /**
      * @var int
@@ -46,7 +47,8 @@ class AttachmentType
 
     }
 
-    public function toArray() {
+    public function toArray() : array
+    {
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
