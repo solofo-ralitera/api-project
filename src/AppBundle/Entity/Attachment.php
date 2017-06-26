@@ -26,14 +26,14 @@ class Attachment implements EntityInterface, CommentEntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="AttachmentType")
-     * @ORM\JoinColumn(name="type", referencedColumnName="id")
+     * @ORM\JoinColumn(name="type", referencedColumnName="id", onDelete="CASCADE")
      */
     private $type;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="author", referencedColumnName="id")
+     * @ORM\JoinColumn(name="author", referencedColumnName="id", onDelete="CASCADE")
      */
     private $author;
 

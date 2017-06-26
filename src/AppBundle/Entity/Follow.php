@@ -24,13 +24,13 @@ class Follow implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="following", referencedColumnName="id")
+     * @ORM\JoinColumn(name="following", referencedColumnName="id", onDelete="CASCADE")
      */
     private $following;
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="follower", referencedColumnName="id")
+     * @ORM\JoinColumn(name="follower", referencedColumnName="id", onDelete="CASCADE")
      */
     private $follower;
 

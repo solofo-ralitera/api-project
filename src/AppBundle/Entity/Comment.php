@@ -49,7 +49,7 @@ class Comment implements EntityInterface, CommentEntityInterface, AttachmentEnti
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="author", referencedColumnName="id")
+     * @ORM\JoinColumn(name="author", referencedColumnName="id", onDelete="CASCADE")
      */
     private $author;
 

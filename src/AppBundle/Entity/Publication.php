@@ -35,13 +35,13 @@ class Publication implements EntityInterface, CommentEntityInterface, Attachment
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="author", referencedColumnName="id")
+     * @ORM\JoinColumn(name="author", referencedColumnName="id", onDelete="CASCADE")
      */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="PublicationType")
-     * @ORM\JoinColumn(name="type", referencedColumnName="id")
+     * @ORM\JoinColumn(name="type", referencedColumnName="id", onDelete="CASCADE")
      */
     private $type;
 
